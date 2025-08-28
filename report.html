@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofiya Chatbot - Interactive Project Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page scrolling application with a fixed top navigation. The structure is thematic (Challenge, Solution, Tech, Capabilities, Vision) to create a narrative flow. This is more engaging than a simple report format. Key interactions include clickable chart bars to display detailed information and interactive cards for technical features, making data exploration intuitive. -->
+    <!-- Visualization & Content Choices: Student Questions (Problem) -> Goal: Inform -> Method: HTML/CSS Speech Bubbles -> Interaction: Hover highlight. Bot Capabilities (Functions) -> Goal: Compare -> Method: Chart.js Horizontal Bar Chart -> Interaction: Click bar to update a text area with details, providing a dynamic way to explore the bot's functions. Technical Features -> Goal: Organize -> Method: HTML/CSS Cards -> Interaction: Click to reveal details. This structure avoids static lists and promotes user engagement. Confirmed NO SVG/Mermaid. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #333;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #4A90E2;
+        }
+        .feature-card, .tech-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover, .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">🤖 Sofiya Project</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#challenge" class="nav-link text-gray-600">The Challenge</a>
+                <a href="#solution" class="nav-link text-gray-600">Our Solution</a>
+                <a href="#tech" class="nav-link text-gray-600">Under the Hood</a>
+                <a href="#capabilities" class="nav-link text-gray-600">Capabilities</a>
+                <a href="#vision" class="nav-link text-gray-600">Vision</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight">Sofiya Chatbot</h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600">An AI-Powered Assistant for the College of Commerce</p>
+                <p class="mt-8 text-md text-gray-500">A Solo Project by: <span class="font-semibold text-gray-700">Anjali (Roll No. 15, second Year)</span></p>
+            </div>
+        </section>
+
+        <section id="challenge" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">The Challenge: Information Overload</h2>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto">New students are often overwhelmed with questions, leading to repetitive inquiries for staff and seniors. Our goal was to create a single, reliable source for answers.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md feature-card">
+                        <p class="font-semibold text-gray-700">"Does the college offer this course?"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md feature-card">
+                        <p class="font-semibold text-gray-700">"What are the fees for BCA?"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md feature-card">
+                        <p class="font-semibold text-gray-700">"How do I apply for admission?"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md feature-card">
+                        <p class="font-semibold text-gray-700">"Who is the HOD of my department?"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md feature-card">
+                        <p class="font-semibold text-gray-700">"Can I pursue tech without a strong math background?"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md feature-card">
+                        <p class="font-semibold text-gray-700">"What are the hostel facilities like?"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Solution: A Smarter Assistant</h2>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto">Sofiya provides a modern, efficient, and always-available solution to bridge the information gap for students.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div class="feature-card p-4">
+                        <div class="text-4xl mb-4">🕒</div>
+                        <h3 class="text-xl font-semibold mb-2">24/7 Availability</h3>
+                        <p class="text-gray-600">Answers questions anytime, even outside office hours.</p>
+                    </div>
+                    <div class="feature-card p-4">
+                        <div class="text-4xl mb-4">⚡️</div>
+                        <h3 class="text-xl font-semibold mb-2">Instant Answers</h3>
+                        <p class="text-gray-600">Eliminates waiting times for common queries.</p>
+                    </div>
+                    <div class="feature-card p-4">
+                        <div class="text-4xl mb-4">📈</div>
+                        <h3 class="text-xl font-semibold mb-2">Increased Efficiency</h3>
+                        <p class="text-gray-600">Frees up staff to focus on more complex tasks.</p>
+                    </div>
+                    <div class="feature-card p-4">
+                        <div class="text-4xl mb-4">💡</div>
+                        <h3 class="text-xl font-semibold mb-2">Modern Experience</h3>
+                        <p class="text-gray-600">Showcases the college's commitment to technology.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Under the Hood: How Sofiya Works</h2>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto">Built with modern web technologies, Sofiya combines a simple interface with intelligent features to deliver a seamless user experience.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="tech-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">Frontend Interface</h3>
+                        <p class="text-gray-600">Clean UI built with <span class="font-medium text-blue-600">HTML</span> and styled with <span class="font-medium text-blue-600">Tailwind CSS</span> for a fully responsive experience.</p>
+                    </div>
+                    <div class="tech-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">Core Logic</h3>
+                        <p class="text-gray-600">Powered by <span class="font-medium text-blue-600">JavaScript</span>, using a predefined Knowledge Base to provide accurate answers.</p>
+                    </div>
+                    <div class="tech-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">Tone Detection</h3>
+                        <p class="text-gray-600">Adapts its conversational style based on the user's selected mood: Funny, Motivational, or Serious.</p>
+                    </div>
+                    <div class="tech-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">Web Speech API</h3>
+                        <p class="text-gray-600">Enables voice responses in a female voice, making the interaction more engaging and accessible.</p>
+                    </div>
+                    <div class="tech-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">Proactive Guidance</h3>
+                        <p class="text-gray-600">Offers animated, clickable options for broad queries to guide users to the right information quickly.</p>
+                    </div>
+                    <div class="tech-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">Mentorship Approach</h3>
+                        <p class="text-gray-600">Designed to communicate like a helpful teacher or friend, fostering a supportive environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="capabilities" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Key Capabilities</h2>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto">Sofiya is equipped to handle a wide range of student inquiries. <span class="font-semibold">Click on a bar below</span> to see what kind of information the bot can provide for each category.</p>
+                </div>
+                <div class="lg:flex lg:items-center lg:space-x-8">
+                    <div class="lg:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="capabilitiesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 mt-8 lg:mt-0">
+                        <div id="capability-details" class="bg-gray-50 p-6 rounded-lg min-h-[250px]">
+                            <h3 id="details-title" class="text-2xl font-bold text-gray-800 mb-4">Explore the Chart</h3>
+                            <p id="details-text" class="text-gray-600">Click on a category in the chart to the left to learn more about what Sofiya can do. The bot provides detailed information, from application procedures to career advice, all in one place.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">BCA Department's Contribution & Future Vision</h2>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto">This project is more than just a tool; it's a step towards a smarter, more connected campus.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold mb-4">A Showcase of Innovation</h3>
+                        <p class="text-gray-600">This project is a significant contribution from the BCA Department, demonstrating our commitment to applying practical skills to solve real-world college problems and enhance the student experience through technology.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold mb-4">The Path Forward</h3>
+                        <p class="text-gray-600">In the future, the college can integrate more advanced AI solutions into its website for even more personalized services. Sofiya is the first step in building a more efficient and supportive digital environment for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Sofiya Chatbot Project by Anjali. All rights reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">A helpful assistant for every student at the College of Commerce.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const capabilityDetails = {
+                'Admissions': {
+                    title: 'Admissions Process',
+                    text: 'Sofiya provides clear, step-by-step guidance on how to apply to the college, including information on entrance exams, required documents, and important deadlines.'
+                },
+                'Courses': {
+                    title: 'Course Information',
+                    text: 'Students can ask about the various programs offered, such as BCA and B.Com. Sofiya gives details on course structure, subjects, and eligibility criteria.'
+                },
+                'Fees & Facilities': {
+                    title: 'Fees & Facilities',
+                    text: 'The chatbot offers transparent information on course fees, as well as details about campus facilities like the library, Wi-Fi, labs, and hostel accommodation.'
+                },
+                'Career Guidance': {
+                    title: 'Career Guidance',
+                    text: 'Sofiya acts as a preliminary guide, offering general advice on career paths in IT, Cyber Security, and other fields related to the courses offered at the college.'
+                },
+                'General Questions': {
+                    title: 'General Conversation',
+                    text: 'Beyond academic queries, Sofiya can engage in simple conversation. It detects user emotions and adapts its tone, making the interaction feel more natural and friendly.'
+                }
+            };
+
+            const ctx = document.getElementById('capabilitiesChart').getContext('2d');
+            const capabilitiesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Admissions', 'Courses', 'Fees & Facilities', 'Career Guidance', 'General Questions'],
+                    datasets: [{
+                        label: 'Query Types Handled',
+                        data: [85, 90, 80, 75, 95],
+                        backgroundColor: [
+                            'rgba(74, 144, 226, 0.7)',
+                            'rgba(80, 227, 194, 0.7)',
+                            'rgba(245, 166, 35, 0.7)',
+                            'rgba(208, 2, 27, 0.7)',
+                            'rgba(126, 211, 33, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(74, 144, 226, 1)',
+                            'rgba(80, 227, 194, 1)',
+                            'rgba(245, 166, 35, 1)',
+                            'rgba(208, 2, 27, 1)',
+                            'rgba(126, 211, 33, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        },
+                        y: {
+                             grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: '500'
+                                }
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const elementIndex = elements[0].index;
+                            const label = capabilitiesChart.data.labels[elementIndex];
+                            const details = capabilityDetails[label];
+                            
+                            document.getElementById('details-title').innerText = details.title;
+                            document.getElementById('details-text').innerText = details.text;
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
